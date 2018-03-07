@@ -15,21 +15,18 @@ class SparseMM(torch.autograd.Function):
     does-pytorch-support-autograd-on-sparse-matrix/6156/7
     """
 
-    def forward(self, matrix1, matrix2):
-        self.save_for_backward(matrix1, matrix2)
-        return torch.mm(matrix1, matrix2)
+    def __init__(self, sparse):
+        super(SparseMM, self).__init__()
+        self.sparse = sparse
+
+    def forward(self, dense):
+        return torch.mm(self.sparse, dense)
 
     def backward(self, grad_output):
-        matrix1, matrix2 = self.saved_tensors
-        grad_matrix1 = grad_matrix2 = None
-
+        grad_input = None
         if self.needs_input_grad[0]:
-            grad_matrix1 = torch.mm(grad_output, matrix2.t())
-
-        if self.needs_input_grad[1]:
-            grad_matrix2 = torch.mm(matrix1.t(), grad_output)
-
-        return grad_matrix1, grad_matrix2
+            grad_input = torch.mm(self.sparse.t(), grad_output)
+        return grad_input
 
 
 class GraphConvolution(Module):
@@ -56,7 +53,7 @@ class GraphConvolution(Module):
 
     def forward(self, input, adj):
         support = torch.mm(input, self.weight)
-        output = SparseMM()(adj, support)
+        output = SparseMM(adj)(support)
         if self.bias is not None:
             return output + self.bias
         else:

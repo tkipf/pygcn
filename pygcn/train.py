@@ -59,7 +59,7 @@ if args.cuda:
     idx_val = idx_val.cuda()
     idx_test = idx_test.cuda()
 
-features, adj, labels = Variable(features), Variable(adj), Variable(labels)
+features, labels = Variable(features), Variable(labels)
 
 
 def train(epoch):
