@@ -8,7 +8,6 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 import torch.optim as optim
-from torch.autograd import Variable
 
 from pygcn.utils import load_data, accuracy
 from pygcn.models import GCN
@@ -45,7 +44,7 @@ adj, features, labels, idx_train, idx_val, idx_test = load_data()
 # Model and optimizer
 model = GCN(nfeat=features.shape[1],
             nhid=args.hidden,
-            nclass=labels.max() + 1,
+            nclass=labels.max().item() + 1,
             dropout=args.dropout)
 optimizer = optim.Adam(model.parameters(),
                        lr=args.lr, weight_decay=args.weight_decay)
@@ -58,8 +57,6 @@ if args.cuda:
     idx_train = idx_train.cuda()
     idx_val = idx_val.cuda()
     idx_test = idx_test.cuda()
-
-features, labels = Variable(features), Variable(labels)
 
 
 def train(epoch):
@@ -94,8 +91,8 @@ def test():
     loss_test = F.nll_loss(output[idx_test], labels[idx_test])
     acc_test = accuracy(output[idx_test], labels[idx_test])
     print("Test set results:",
-          "loss= {:.4f}".format(loss_test.data[0]),
-          "accuracy= {:.4f}".format(acc_test.data[0]))
+          "loss= {:.4f}".format(loss_test.item()),
+          "accuracy= {:.4f}".format(acc_test.item()))
 
 
 # Train model
