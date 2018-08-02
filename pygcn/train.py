@@ -78,10 +78,10 @@ def train(epoch):
     loss_val = F.nll_loss(output[idx_val], labels[idx_val])
     acc_val = accuracy(output[idx_val], labels[idx_val])
     print('Epoch: {:04d}'.format(epoch+1),
-          'loss_train: {:.4f}'.format(loss_train.data[0]),
-          'acc_train: {:.4f}'.format(acc_train.data[0]),
-          'loss_val: {:.4f}'.format(loss_val.data[0]),
-          'acc_val: {:.4f}'.format(acc_val.data[0]),
+          'loss_train: {:.4f}'.format(loss_train.item()),
+          'acc_train: {:.4f}'.format(acc_train.item()),
+          'loss_val: {:.4f}'.format(loss_val.item()),
+          'acc_val: {:.4f}'.format(acc_val.item()),
           'time: {:.4f}s'.format(time.time() - t))
 
 
