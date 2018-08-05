@@ -19,8 +19,8 @@ This implementation makes use of the Cora dataset from [2].
 
 ## Requirements
 
-  * PyTorch 0.4.0
-  * Python 2.7
+  * PyTorch 0.4 or 0.5
+  * Python 2.7 or 3.6
 
 ## Usage
 
