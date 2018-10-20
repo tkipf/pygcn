@@ -1,6 +1,6 @@
 import torch.nn as nn
 import torch.nn.functional as F
-from layers import GraphConvolution
+from pygcn.layers import GraphConvolution
 
 
 class GCN(nn.Module):
