@@ -13,7 +13,7 @@ from pygcn.utils import load_data, accuracy
 from pygcn.models import GCN
 
 # Training settings
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser()  # 设置参数
 parser.add_argument('--no-cuda', action='store_true', default=False,
                     help='Disables CUDA training.')
 parser.add_argument('--fastmode', action='store_true', default=False,
@@ -31,8 +31,8 @@ parser.add_argument('--dropout', type=float, default=0.5,
                     help='Dropout rate (1 - keep probability).')
 
 args = parser.parse_args()
-args.cuda = not args.no_cuda and torch.cuda.is_available()
-
+args.cuda = not args.no_cuda and torch.cuda.is_available()  # 判断加不加gup
+# 固定所有要随机地方的随机种子
 np.random.seed(args.seed)
 torch.manual_seed(args.seed)
 if args.cuda:
@@ -46,7 +46,7 @@ model = GCN(nfeat=features.shape[1],
             nhid=args.hidden,
             nclass=labels.max().item() + 1,
             dropout=args.dropout)
-optimizer = optim.Adam(model.parameters(),
+optimizer = optim.Adam(model.parameters(),  # 设置adam迭代器
                        lr=args.lr, weight_decay=args.weight_decay)
 
 if args.cuda:
@@ -64,11 +64,10 @@ def train(epoch):
     model.train()
     optimizer.zero_grad()
     output = model(features, adj)
-    loss_train = F.nll_loss(output[idx_train], labels[idx_train])
+    loss_train = F.nll_loss(output[idx_train], labels[idx_train])  # 就是用于分类认为的损失函数
     acc_train = accuracy(output[idx_train], labels[idx_train])
     loss_train.backward()
     optimizer.step()
-
     if not args.fastmode:
         # Evaluate validation set performance separately,
         # deactivates dropout during validation run.
@@ -95,7 +94,7 @@ def test():
           "accuracy= {:.4f}".format(acc_test.item()))
 
 
-# Train model
+# Train model  循环执行训练（共args.epochs轮，默认200轮）
 t_total = time.time()
 for epoch in range(args.epochs):
     train(epoch)
