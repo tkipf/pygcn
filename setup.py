@@ -1,7 +1,7 @@
 from setuptools import setup
-from setuptools import find_packages
+from setuptools import find_packages  # 在当前文件夹下，如果有——init.py这识别.py文件，将所有python文件加入组成库
 
-setup(name='pygcn',
+setup(name='pygcn',  # 库命名
       version='0.1',
       description='Graph Convolutional Networks in PyTorch',
       author='Thomas Kipf',
@@ -14,4 +14,4 @@ setup(name='pygcn',
                         'scipy'
                         ],
       package_data={'pygcn': ['README.md']},
-      packages=find_packages())
+      packages=find_packages())# 在当前文件夹下，如果有——init.py这识别.py文件，将所有python文件加入组成库
