@@ -1,0 +1,13 @@
+LICENCE
+README.md
+setup.py
+pygcn/__init__.py
+pygcn/layers.py
+pygcn/models.py
+pygcn/train.py
+pygcn/utils.py
+pygcn.egg-info/PKG-INFO
+pygcn.egg-info/SOURCES.txt
+pygcn.egg-info/dependency_links.txt
+pygcn.egg-info/requires.txt
+pygcn.egg-info/top_level.txt

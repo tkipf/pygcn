@@ -1,0 +1,5 @@
+Configuration,Test Accuracy
+With Self-loop,0.803
+Without Self-loop,0.795
+Symmetric Normalization,0.806
+Left Normalization,0.83

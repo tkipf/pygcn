@@ -1,0 +1,5 @@
+configuration,add_self_loop,normalization,test_accuracy
+"Baseline (with self-loop, symmetric)",True,symmetric,0.819
+Without self-loop (symmetric),False,symmetric,0.809
+With self-loop (left normalization),True,left,0.812
+Without self-loop (left normalization),False,left,0.798

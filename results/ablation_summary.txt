@@ -1,0 +1,48 @@
+# GCN Ablation Study Summary
+
+## Experimental Setup
+- Model: 2-layer GCN
+- Dataset: Cora
+- Training epochs: 200
+- Learning rate: 0.01
+- Weight decay: 5e-4
+- Hidden units: 16
+- Dropout: 0.5
+
+## 1. Self-Loop Ablation Study
+
+### Results:
+| Configuration       | Test Accuracy |
+|---------------------|---------------|
+| With Self-Loop      | 0.812         |
+| Without Self-Loop   | 0.776         |
+
+### Analysis:
+- Adding self-loop improves test accuracy by 3.6% (0.812 vs 0.776)
+- Self-loop helps the model preserve node-specific information
+- Without self-loop, nodes can only aggregate information from neighbors, potentially losing important self-features
+
+## 2. Normalization Ablation Study
+
+### Results:
+| Configuration           | Test Accuracy |
+|-------------------------|---------------|
+| Symmetric Normalization | 0.808         |
+| Left Normalization      | 0.822         |
+
+### Analysis:
+- Left normalization (row-wise) performs slightly better than symmetric normalization
+- Accuracy difference: 1.4% (0.822 vs 0.808)
+- Left normalization ensures each node's features are properly scaled before aggregation
+- Symmetric normalization may lead to over-smoothing in some cases
+
+## Key Takeaways
+1. Self-loop is crucial for GCN performance, providing significant accuracy improvement
+2. Normalization choice has smaller but noticeable impact on final results
+3. The combination of self-loop and left normalization yields the best performance in this study
+
+## Files Generated
+- self_loop_ablation.png: Training curves for self-loop comparison
+- normalization_ablation.png: Training curves for normalization comparison
+- self_loop_results.csv: Numerical results for self-loop ablation
+- normalization_results.csv: Numerical results for normalization ablation
