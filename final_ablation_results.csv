@@ -1,0 +1,4 @@
+Model,Test Accuracy
+Baseline (Left Norm + Self-loop),0.827
+No Self-loop,0.812
+Symmetric Norm + Self-loop,0.81
