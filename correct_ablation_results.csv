@@ -1,0 +1,5 @@
+Model,Test Accuracy,Best Epoch
+Baseline (Left Norm + Self-loop),0.369,9
+No Self-loop,0.376,12
+Symmetric Norm + Self-loop,0.309,0
+Left Norm + Self-loop,0.316,0
